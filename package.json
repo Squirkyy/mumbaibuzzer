@@ -13,5 +13,11 @@
     "@nuxt/devtools": "latest",
     "@nuxtjs/tailwindcss": "^6.8.0",
     "nuxt": "^3.7.3"
+  },
+  "dependencies": {
+    "h3": "^1.8.1",
+    "h3-clerk": "^0.3.3",
+    "node-fetch-native": "^1.4.0",
+    "vue-clerk": "^0.0.11"
   }
 }
