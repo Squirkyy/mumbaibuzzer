@@ -1,20 +1,20 @@
 <template>
-  <div class="hero h-full">
-    <div class="hero-content text-center">
-      <div class="max-w-md">
-        <h1 class="text-5xl font-bold">
-          Auth starts here.
-        </h1>
-        <p class="py-6">
-          A simple and powerful Nuxt template featuring authentication and user management powered by Clerk.
-        </p>
-        <NuxtLink to="/sign-in" class="btn btn-primary">
-          Get Started
-        </NuxtLink>
-      </div>
+  <main class="flex min-h-screen flex-col items-center justify-between p-24">
+    <h1 class="font-bold">Hey {{user?.user?.value?.firstName}}</h1>
+    <div class="flex w-full">
+      <NuxtLink to="/game/play" class="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">PLAY</NuxtLink>
+      <div class="divider divider-horizontal">OR</div>
+      <NuxtLink to="/create" class="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">CREATE</NuxtLink>
     </div>
-  </div>
+    <div>
+      <UserButton afterSignOutUrl="/" />
+    </div>
+  </main>
 </template>
 
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import {UserButton, useUser} from "vue-clerk";
+const user = useUser();
+
+</script>
