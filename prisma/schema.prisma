@@ -1,0 +1,78 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  ID           String   @id
+  createdGames Game[]
+  answers      Answer[]
+}
+
+model Game {
+  ID        String         @id @default(uuid())
+  creator   User           @relation(fields: [creatorID], references: [ID])
+  creatorID String
+  teams     Team[]
+  status    String
+  questions GameQuestion[]
+}
+
+model Team {
+  ID      String   @id @default(uuid())
+  name    String
+  game    Game     @relation(fields: [gameID], references: [ID])
+  gameID  String
+  answers Answer[]
+}
+
+model Category {
+  ID        String     @id @default(uuid())
+  name      String
+  questions Question[]
+}
+
+model Level {
+  ID        String     @id @default(uuid())
+  number    Int
+  questions Question[]
+}
+
+model Question {
+  ID         String         @id @default(uuid())
+  category   Category       @relation(fields: [categoryID], references: [ID])
+  categoryID String
+  level      Level          @relation(fields: [levelID], references: [ID])
+  levelID    String
+  type       String
+  text       String
+  games      GameQuestion[]
+  answers    Answer[]
+}
+
+model Answer {
+  id         String   @id @default(uuid())
+  question   Question @relation(fields: [questionID], references: [ID])
+  questionID String
+  team       Team     @relation(fields: [teamID], references: [ID])
+  teamID     String
+  user       User     @relation(fields: [userID], references: [ID])
+  userID     String
+  text       String
+  isCorrect  Boolean
+}
+
+model GameQuestion {
+  ID         String   @id @default(uuid())
+  game       Game     @relation(fields: [gameID], references: [ID])
+  gameID     String
+  question   Question @relation(fields: [questionID], references: [ID])
+  questionID String
+}

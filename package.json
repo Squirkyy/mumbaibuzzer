@@ -13,9 +13,11 @@
     "@nuxt/devtools": "latest",
     "@nuxtjs/tailwindcss": "^6.8.0",
     "daisyui": "^3.7.7",
-    "nuxt": "^3.7.3"
+    "nuxt": "^3.7.3",
+    "prisma": "^5.3.1"
   },
   "dependencies": {
+    "@prisma/client": "^5.3.1",
     "@trpc/client": "^10.38.4",
     "@trpc/server": "^10.38.4",
     "h3": "^1.8.1",
