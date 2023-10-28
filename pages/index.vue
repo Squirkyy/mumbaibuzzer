@@ -3,7 +3,7 @@
     <h1 class="font-bold">{{greeting}}</h1>
     <div class="flex w-full">
       <NuxtLink
-        to="/game/play"
+        to="/game"
         class="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center"
         >PLAY</NuxtLink
       >
@@ -13,6 +13,7 @@
         class="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center"
         >CREATE</NuxtLink
       >
+      <button @click="() => console.table(user?.user?.value)">Button</button>
     </div>
     <div>
       <UserButton afterSignOutUrl="/" />
@@ -24,6 +25,6 @@
 import { UserButton, useUser } from "vue-clerk";
 const { $client } = useNuxtApp();
 const user = useUser();
-const hello = await $client.hello.useQuery({ text: (user?.user?.value?.firstName)});
+const hello = await $client.index.hello.useQuery({ text: (user?.user?.value?.firstName)});
 const greeting = useState('greeting', () => (hello.data?.value?.greeting));
 </script>
